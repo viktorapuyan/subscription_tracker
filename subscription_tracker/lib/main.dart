@@ -439,36 +439,16 @@ class _QuickActionsBar extends StatelessWidget {
 					),
 				],
 			),
-			child: Row(
-				children: [
-					Expanded(
-						child: FilledButton.icon(
-							onPressed: () {},
-							icon: const Icon(Icons.add_rounded),
-							label: const Text('Add Subscription'),
-							style: FilledButton.styleFrom(
-								backgroundColor: const Color(0xFF2335AA),
-								foregroundColor: Colors.white,
-								minimumSize: const Size.fromHeight(44),
-								shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-							),
-						),
-					),
-					const SizedBox(width: 8),
-					Expanded(
-						child: OutlinedButton.icon(
-							onPressed: () {},
-							icon: const Icon(Icons.mail_outline_rounded),
-							label: const Text('Scan Email'),
-							style: OutlinedButton.styleFrom(
-								side: const BorderSide(color: Color(0xFFD3DAEC)),
-								foregroundColor: const Color(0xFF253250),
-								minimumSize: const Size.fromHeight(44),
-								shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-							),
-						),
-					),
-				],
+			child: OutlinedButton.icon(
+				onPressed: () {},
+				icon: const Icon(Icons.mail_outline_rounded),
+				label: const Text('Scan Email'),
+				style: OutlinedButton.styleFrom(
+					side: const BorderSide(color: Color(0xFFD3DAEC)),
+					foregroundColor: const Color(0xFF253250),
+					minimumSize: const Size.fromHeight(44),
+					shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+				),
 			),
 		);
 	}
@@ -483,10 +463,11 @@ class _BottomNavBar extends StatelessWidget {
 			selectedIndex: 0,
 			backgroundColor: Colors.white,
 			indicatorColor: const Color(0xFFE6ECFF),
-			height: 70,
+			height: 80,
 			destinations: const [
 				NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Home'),
 				NavigationDestination(icon: Icon(Icons.view_list_outlined), selectedIcon: Icon(Icons.view_list), label: 'Subscriptions'),
+				NavigationDestination(icon: _AddNavIcon(), selectedIcon: _AddNavIcon(selected: true), label: ''),
 				NavigationDestination(
 					icon: Icon(Icons.bar_chart_outlined),
 					selectedIcon: Icon(Icons.bar_chart),
@@ -494,6 +475,38 @@ class _BottomNavBar extends StatelessWidget {
 				),
 				NavigationDestination(icon: Icon(Icons.settings_outlined), selectedIcon: Icon(Icons.settings), label: 'Settings'),
 			],
+		);
+	}
+}
+
+class _AddNavIcon extends StatelessWidget {
+	const _AddNavIcon({this.selected = false});
+
+	final bool selected;
+
+	@override
+	Widget build(BuildContext context) {
+		final baseColor = selected ? const Color(0xFF1A2CA8) : const Color(0xFF2335AA);
+		return Container(
+			height: 50,
+			width: 50,
+			decoration: BoxDecoration(
+				shape: BoxShape.circle,
+				color: baseColor,
+				border: Border.all(color: Colors.white, width: 3),
+				boxShadow: [
+					BoxShadow(
+						color: baseColor.withValues(alpha: 0.42),
+						blurRadius: 18,
+						offset: const Offset(0, 10),
+					),
+				],
+			),
+			child: Icon(
+				Icons.add_rounded,
+				size: 28,
+				color: selected ? const Color(0xFFF4F6FF) : Colors.white,
+			),
 		);
 	}
 }
