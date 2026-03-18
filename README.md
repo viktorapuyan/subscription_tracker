@@ -43,6 +43,3 @@ flutter test
 
 Contributing
 - Contributions welcome — open an issue or submit a pull request.
-
-If you'd like a store-optimized description, screenshots, or a shorter README variant, tell me which tone and length you prefer.
-
